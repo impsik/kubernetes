@@ -1,0 +1,33 @@
+#!/usr/bin/env ansible-playbook
+---
+# This playbook will upgrade kubernetes version on nodes
+#
+- hosts: localhost
+  remote_user: username
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: "Check out latest rke version"
+      shell: curl -s https://api.github.com/repos/rancher/rke/releases/latest | jq -r '.assets[] | select(.name|match("rke_linux-amd64$")) | .browser_download_url'
+      register: url
+
+    - name: "Download and install latest RKE version"
+      ansible.builtin.get_url:
+        url: "{{ url.stdout }}"
+        dest: /usr/local/bin/rke
+        mode: 755
+
+    - name: "Check out latest kubernetes verion"
+      shell: rke config --list-version --all | sort | tail -n 1
+      register: kubernetes
+
+    - name: "Add newest kubernets version to cluster.yml config file"
+      lineinfile:
+        path: /kvm/cluster.yml
+        regexp: '^kubernetes_version'
+        line: "kubernetes_version: {{ kubernetes.stdout }}"
+
+    - name: "Upgrade kubernetes version"
+      shell: rke up --config /kvm/cluster.yml
+      become_user: username
