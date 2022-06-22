@@ -1,4 +1,5 @@
-# Warning: those playbooks works on TEST cluster!! Use them at your own risk.
+# Warning: those playbooks works on my TEST cluster! 
+# Use them at your own risk.
 
 My kubernetes related ansible playbooks
 
