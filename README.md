@@ -1,4 +1,4 @@
-# Warning: works on my machine!!
+# Warning: those playbooks works on TEST cluster!! Use them at your own risk.
 
 My kubernetes related ansible playbooks
 
