@@ -34,7 +34,7 @@
 
     - name: "Drain node {{ inventory_hostname|lower }}, even if there are pods not managed by a ReplicationController, Job, or DaemonSet on it."
       shell: kubectl drain {{ inventory_hostname|lower }} --ignore-daemonsets --delete-emptydir-data --force --pod-selector='app!=csi-attacher,app!=csi-provisioner' --kubeconfig ~/.kube/config
-      become_user: imre
+      become_user: user
       delegate_to: localhost
 
     - name: Pause for 2 minute to relocate PODs'
