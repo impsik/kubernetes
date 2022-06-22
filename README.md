@@ -1,6 +1,6 @@
-Warnning: works on my machine!!
-# kubernetes
-kubernetes related ansible playbooks
+# Warning: works on my machine!!
+
+My kubernetes related ansible playbooks
 
 ### kube_drain.yml
 Drains kubernetes nodes, which are described in hosts file. workers first, then etcd-cp nodes in serial, one by one.
