@@ -1,0 +1,44 @@
+kubernetes_version: v1.23.7-rancher1-1
+nodes:
+  - address: 192.168.122.6
+    internal_address: 192.168.122.6
+    user: user
+    role: [controlplane,etcd]
+  - address: 192.168.122.7
+    internal_address: 192.168.122.7
+    user: user
+    role: [controlplane,etcd]
+  - address: 192.168.122.8
+    internal_address: 192.168.122.8
+    user: user
+    role: [controlplane,etcd]
+  - address: 192.168.122.9
+    internal_address: 192.168.122.9
+    user: user
+    role: [worker]
+  - address: 192.168.122.10
+    internal_address: 192.168.122.10
+    user: user
+    role: [worker]
+  - address: 192.168.122.11
+    internal_address: 192.168.122.11
+    user: user
+    role: [worker]
+
+cluster_name: user
+services:
+  etcd:
+    snapshot: true
+    creation: 2h
+    retention: 24h
+    extra_args:
+      enable-v2: "true"
+    kubelet:
+      fail_swap_on: false
+      extra_args:
+        max-pods: 250
+        cloud-provider: "external"
+ingress:
+  provider: nginx
+  options:
+    use-forwarded-headers: "true"
