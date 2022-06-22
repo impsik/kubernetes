@@ -11,3 +11,6 @@ Downloads latest RKE version, gets latest available kubernetes version and upgra
 
 ### cluster.yml 
 my testcluster setup.
+
+### hosts
+Contains my hosts list.
