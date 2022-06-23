@@ -9,10 +9,10 @@
   vars:
    
     master_nodes:
-      - ip: 192.168.122.14
+      - ip: 192.168.122.14 # Change it or add modre nodes
 
     worker_nodes:
-      - ip: 192.168.122.15
+      - ip: 192.168.122.15 # Change it or add modre nodes
 
     cluster_name: testing # Change it
     hostname: example.com # Change it
