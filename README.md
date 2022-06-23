@@ -19,7 +19,7 @@ v1.18.20-rancher1-3
 ```
 Make this playbook executable `chmod +x build.yml` and run it: `./build.yml`
 
-This playbook will build kubernetes cluster, installs cert-manager and Rancher. config file is generated from jinja2 template.
+This playbook will build kubernetes cluster, installs cert-manager and Rancher. config file is generated from jinja2 (conf_template.j2) template.
 
 Define your variables in that file, add more master and/or worker nodes. If you need to **add new nodes after first run**, add nodes under `vars:` and run **build.yml** playbook again.
 
