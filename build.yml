@@ -14,8 +14,8 @@
     worker_nodes:
       - ip: 192.168.122.15
 
-    cluster_name: testing
-    hostname: example.com
+    cluster_name: testing # Change it
+    hostname: example.com # Change it
     #####################
 
   tasks:
