@@ -4,10 +4,11 @@
 My kubernetes related ansible playbooks
 
 **build.yml**
+Make this playbook executable `chmod +x build.yml` and run it: `./build.yml`
 
 This playbook will build kubernetes cluster, installs cert-manager and Rancher. config file is generated from jinja2 template.
 
-Define your variables in that file, add more master and/or worker nodes.
+Define your variables in that file, add more master and/or worker nodes. If you need to add new nodes after first, add nodes and run build.yml again.
 
 Define your cluster name and hostname. Hostname can't be IP address.
 
