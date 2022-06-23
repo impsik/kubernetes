@@ -7,7 +7,7 @@
 
   # Define your variables here
   vars:
-   
+    user: user # This will be user who is on nodes in docker group and. On nodes docker has to be installed
     master_nodes:
       - ip: 192.168.122.14 # Change it or add more nodes
 
