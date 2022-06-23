@@ -17,6 +17,8 @@ v1.23.7-rancher1-1
 v1.22.10-rancher1-1
 v1.18.20-rancher1-3
 ```
+Use the version of Kubernetes that suits you in conf_template.j2
+
 Make this playbook executable `chmod +x build.yml` and run it: `./build.yml`
 
 This playbook will build kubernetes cluster, installs cert-manager and Rancher. config file is generated from jinja2 (conf_template.j2) template.
