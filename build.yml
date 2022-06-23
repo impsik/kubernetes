@@ -1,0 +1,68 @@
+#!/usr/bin/env ansible-playbook
+---
+# This playbook will create initial kubernetes cluster config file and build up cluster.
+# Also, it installs cert-manager and rancher.
+
+- hosts: localhost
+  remote_user: user
+
+  # Define your variables here
+  vars:
+    user: user
+    
+    master_nodes:
+      - ip: 192.168.122.14
+
+    worker_nodes:
+      - ip: 192.168.122.15
+
+    cluster_name: testing
+    hostname: example.com
+
+  tasks:
+  - name: "Create {{ hostname }}.yml config from template"
+    template:
+      src: "conf_template.j2"
+      dest: "./{{ hostname }}.yml"
+  
+  - name: "Build up cluster using: rke up --config /scripts/output.yaml.yml - it will take some time!"
+    shell: rke up --config /scripts/{{ hostname }}.yml
+    delegate_to: localhost
+
+  - name: "Add rancher chart repo"
+    kubernetes.core.helm_repository:
+      name: rancher-stable
+      repo_url: "https://releases.rancher.com/server-charts/latest"
+
+  - name: "Add the Jetstack Helm repository"
+    kubernetes.core.helm_repository:
+      name: jetstack-stable
+      repo_url: "https://charts.jetstack.io"  
+
+  - name: Deploy stable version of cert-manager chart inside cert-manager namespace (and create it)
+    kubernetes.core.helm:
+      name: cert-manager
+      chart_ref: jetstack/cert-manager
+      release_namespace: cert-manager
+      create_namespace: true
+      wait: yes
+      update_repo_cache: yes
+      values:
+        installCRDs: true
+      kubeconfig: kube_config_{{ hostname }}.yml
+
+  - name: "Wait 1 minute so that cert-manager is fully deployed"
+    pause:
+      minutes: 1
+
+  - name: Deploy stable version of Rancher chart inside cattle-system namespace (and create it)
+    kubernetes.core.helm:
+      name: rancher
+      chart_ref: rancher-stable/rancher
+      release_namespace: cattle-system
+      create_namespace: true
+      wait: yes
+      update_repo_cache: yes
+      values:
+        hostname: "{{ hostname }}"
+      kubeconfig: kube_config_{{ hostname }}.yml
