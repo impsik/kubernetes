@@ -21,13 +21,13 @@ Use the version of Kubernetes that suits you under `var:`
 
 Make this playbook executable `chmod +x build.yml` and run it: `./build.yml`
 
-This playbook will build kubernetes cluster, installs cert-manager and Rancher. config file is generated from jinja2 (conf_template.j2) template.
+This playbook will build kubernetes cluster, installs cert-manager and Rancher. Config file is generated from jinja2 (conf_template.j2) template.
 
 Define your variables in **build.yml** file, add more master and/or worker nodes. If you need to **add new nodes after first run**, add nodes under `vars:` and run **build.yml** playbook again.
 
 Define your cluster name and hostname. Hostname can't be IP address.
 
-To use kubectl copy kube_config_<YOUR_HOSTNAME>.yml to ~/.kube/config
+To use **kubectl** copy kube_config_<YOUR_HOSTNAME>.yml to ~/.kube/config
 ```
 $ cp kube_config_hostname.com.yml ~/.kube/config 
 $ kubectl get nodes
