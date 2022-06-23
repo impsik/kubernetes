@@ -4,12 +4,10 @@
 # Also, it installs cert-manager and rancher.
 
 - hosts: localhost
-  remote_user: user
 
   # Define your variables here
   vars:
-    user: user
-    
+   
     master_nodes:
       - ip: 192.168.122.14
 
@@ -18,6 +16,7 @@
 
     cluster_name: testing
     hostname: example.com
+    #####################
 
   tasks:
   - name: "Create {{ hostname }}.yml config from template"
