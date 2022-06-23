@@ -17,7 +17,8 @@ $ cp kube_config_hostname.com.yml ~/.kube/config
 $ kubectl get nodes
 NAME             STATUS   ROLES               AGE   VERSION
 192.168.122.14   Ready    controlplane,etcd   14m   v1.23.7
-192.168.122.15   Ready    worker              14m   v1.23.7```
+192.168.122.15   Ready    worker              14m   v1.23.7
+```
 
 **kube_drain.yml**
 Drains kubernetes nodes, which are described in hosts file. workers first, then etcd-cp nodes in serial, one by one.
