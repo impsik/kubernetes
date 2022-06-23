@@ -5,6 +5,18 @@ My kubernetes related ansible playbooks
 
 **build.yml**
 
+This playbook assumes you have latest rke installed
+```
+$ rke --version
+rke version v1.3.12
+$ rke config --list-version --all
+v1.19.16-rancher1-6
+v1.20.15-rancher1-4
+v1.21.13-rancher1-1
+v1.23.7-rancher1-1
+v1.22.10-rancher1-1
+v1.18.20-rancher1-3
+```
 Make this playbook executable `chmod +x build.yml` and run it: `./build.yml`
 
 This playbook will build kubernetes cluster, installs cert-manager and Rancher. config file is generated from jinja2 template.
