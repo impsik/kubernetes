@@ -5,7 +5,7 @@ My kubernetes related ansible playbooks
 
 **build.yml**
 
-This playbook will build kubernetes cluster, installs cert-manager and Rancher.
+This playbook will build kubernetes cluster, installs cert-manager and Rancher. config file is generated from jinja2 template.
 
 Define your variables in that file, add more master and/or worker nodes.
 
