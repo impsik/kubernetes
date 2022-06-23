@@ -3,10 +3,13 @@
 
 My kubernetes related ansible playbooks
 
-## build.yml
+### build.yml
 This playbook will build kubernetes cluster, installs cert-manager and Rancher.
-Define your variables in that file, add more master and/or worker nodes
+
+Define your variables in that file, add more master and/or worker nodes.
+
 Define your cluster name and hostname. Hostname can't be IP address.
+
 To use kubectl copy kube_config_<YOUR_HOSTNAME>.yml to ~/.kube/config
 
 ### kube_drain.yml
