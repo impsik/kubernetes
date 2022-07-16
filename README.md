@@ -44,6 +44,7 @@ Upgrades node, restarts if needed and makes it schedulable again.
 **kube_upgrade.yml**
 
 Downloads latest RKE version, gets latest available kubernetes version and upgrades nodes with: rke up --config cluster.yml
+Copy your *.rkestate to cluster.rkestate
 
 **cluster.yml**
 
