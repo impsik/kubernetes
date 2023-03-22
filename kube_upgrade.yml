@@ -8,15 +8,22 @@
   become_method: sudo
 
   tasks:
-    - name: "Check out latest rke version"
-      shell: curl -s https://api.github.com/repos/rancher/rke/releases/latest | jq -r '.assets[] | select(.name|match("rke_linux-amd64$")) | .browser_download_url'
-      register: url
+    - name: Get latest RKE release information
+      uri:
+        url: https://api.github.com/repos/rancher/rke/releases/latest
+        return_content: yes
+      register: rke_release_info
 
-    - name: "Download and install latest RKE version"
-      ansible.builtin.get_url:
-        url: "{{ url.stdout }}"
-        dest: /usr/local/bin/rke
-        mode: 755
+    - name: Set RKE download URL and latest Kubernetes version
+      set_fact:
+        rke_download_url: "{{ rke_release_info.json.assets[0].browser_download_url }}"
+        rke_kubernetes_version: "{{ rke_release_info.json.name }}"
+
+    - name: Download the latest RKE binary
+      get_url:
+        url: "{{ rke_download_url }}"
+        dest: "/usr/local/bin/rke"
+        mode: '0755'
 
     - name: "Check out latest kubernetes verion"
       shell: rke config --list-version --all | sort | tail -n 1
