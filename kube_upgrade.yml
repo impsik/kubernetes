@@ -14,9 +14,15 @@
         return_content: yes
       register: rke_release_info
 
+    - name: Find RKE amd64 Linux binary asset
+      set_fact:
+        rke_amd64_linux_asset: "{{ item }}"
+      loop: "{{ rke_release_info.json.assets }}"
+      when: "'amd64' in item.name and 'linux' in item.name and item.content_type == 'application/octet-stream'"
+
     - name: Set RKE download URL and latest Kubernetes version
       set_fact:
-        rke_download_url: "{{ rke_release_info.json.assets[0].browser_download_url }}"
+        rke_download_url: "{{ rke_amd64_linux_asset.browser_download_url }}"
         rke_kubernetes_version: "{{ rke_release_info.json.name }}"
 
     - name: Download the latest RKE binary
